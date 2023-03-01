@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "",
+  baseURL: "http://localhost:9292/riders",
 });
 
 function RegisterRider() {
