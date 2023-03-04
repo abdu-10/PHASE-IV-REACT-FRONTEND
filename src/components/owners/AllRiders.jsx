@@ -1,89 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { allRiders } from "../../api/owner/owner";
+import { Typography, Stack, Avatar, Box, LinearProgress } from "@mui/material";
+import CustomTable from "../common/CustomTable";
 
 function AllRiders() {
+  const [loading, setLoading] = useState(false);
+  const [ridersData, setRidersData] = useState([]);
+  const fetchRiders = () => {
+    setLoading(true);
+    allRiders().then((res) => {
+      setRidersData(res.data)
+      setLoading(false);
+    });    
+  };
+
+  useEffect(() => {
+    fetchRiders();
+  }, []);
+  const columns = [
+    {
+      field: "first_name",
+      headerName: "First Name",
+      width: 250,
+      renderCell: (params) => {
+        return (
+          <>
+            <Avatar sx={{ mr: 2 }} src={params.value} alt={params.value} />
+            {params.value}
+          </>
+        );
+      },
+    },
+    {
+      field: "last_name",
+      headerName: "Surname",
+      width: 150,
+      
+    },
+    {
+      field: "location",
+      headerName: "Location",
+      width: 150,
+    },
+    {
+      field: "phone_number",
+      headerName: "Telephone",
+      width: 150,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 150,
+    },
+  ]
   return (
     <>
-      <div className="relative mt-20 overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                First Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Last Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Location
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Avatar
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Email
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Phone Number
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Apple
-              </th>
-              <td className="px-6 py-4">Silver</td>
-              <td className="px-6 py-4">Lamu</td>
-              <td className="px-6 py-4">Avatar</td>
-              <td className="px-6 py-4">ai@g</td>
-              <td className="px-6 py-4">071219</td>
-            </tr>
-            <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Surface
-              </th>
-              <td className="px-6 py-4">White</td>
-              <td className="px-6 py-4">Buruburu</td>
-              <td className="px-6 py-4">Avatar</td>
-              <td className="px-6 py-4">ai@g</td>
-              <td className="px-6 py-4">071219</td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Magic
-              </th>
-              <td className="px-6 py-4">Black</td>
-              <td className="px-6 py-4">Malindi</td>
-              <td className="px-6 py-4">Avatar</td>
-              <td className="px-6 py-4">ai@g</td>
-              <td className="px-6 py-4">071219</td>
-            </tr>
-            <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Pixel
-              </th>
-              <td className="px-6 py-4">Gray</td>
-              <td className="px-6 py-4">Marsabit</td>
-              <td className="px-6 py-4">Avatar</td>
-              <td className="px-6 py-4">ai@g</td>
-              <td className="px-6 py-4">071219</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <Stack
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        sx={{ p: 2 }}
+      >
+        <Typography>These are the verified Riders on the platform</Typography>
+      </Stack>
+      <Box
+        sx={{
+          mt: 5,
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "primary.lightest_gray",
+            fontSize: 16,
+          },
+        }}
+      >
+        {loading && <LinearProgress/>}
+        {!loading && <CustomTable rows={ridersData} columns={columns}/>}
+      </Box>
     </>
   );
 }
