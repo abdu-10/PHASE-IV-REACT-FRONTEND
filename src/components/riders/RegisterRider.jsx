@@ -14,6 +14,17 @@ function RegisterRider() {
     license_number: "",
     spouse_number: "",
   });
+  const {
+    first_name,
+    last_name,
+    location,
+    avatar,
+    email,
+    phone_number,
+    id_number,
+    license_number,
+    spouse_number,
+  } = formData
   function handleChange(e) {
     const key = e.target.name;
     const value = e.target.value;
@@ -22,7 +33,8 @@ function RegisterRider() {
       ...formData,
       [key]: value,
     });
-  }
+      console.log(formData)
+  } 
   function handleSubmit(e) {
     e.preventDefault();
     return registerRider(
@@ -66,7 +78,7 @@ function RegisterRider() {
                           id="first_name"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={first_name}
                         />
                       </div>
 
@@ -78,7 +90,7 @@ function RegisterRider() {
                           id="last_name"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={last_name}
                           placeholder="email@domain.com"
                         />
                       </div>
@@ -91,7 +103,7 @@ function RegisterRider() {
                           id="location"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={location}
                           placeholder=""
                         />
                       </div>
@@ -104,7 +116,7 @@ function RegisterRider() {
                           id="avatar"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={avatar}
                           placeholder=""
                         />
                       </div>
@@ -117,7 +129,7 @@ function RegisterRider() {
                           id="email"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={email}
                           placeholder=""
                         />
                       </div>
@@ -130,7 +142,7 @@ function RegisterRider() {
                           id="phone_number"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={phone_number}
                           placeholder=""
                         />
                       </div>
@@ -142,7 +154,7 @@ function RegisterRider() {
                           id="id_number"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={id_number}
                           placeholder=""
                         />
                       </div>
@@ -150,11 +162,11 @@ function RegisterRider() {
                         <label for="driver_license">Driver License</label>
                         <input
                           type="number"
-                          name="driver_license"
+                          name="license_number"
                           id="driver license"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={license_number}
                           placeholder=""
                         />
                       </div>
@@ -166,14 +178,14 @@ function RegisterRider() {
                           id="spouse_number"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={spouse_number}
                           placeholder=""
                         />
                       </div>
                       <div className="md:col-span-5 text-right">
                         <div className="inline-flex items-end">
                           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                          <NavLink to="/rider/dashboard">Submit</NavLink>
+                          Submit
                           </button>
                         </div>
                       </div>
