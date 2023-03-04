@@ -7,8 +7,16 @@ function CreateBike() {
     cc: "",
     reg_number: "",
     price: "",
-    booked: "",
+    booked: false,
   });
+  const {
+    model,
+    cc,
+    reg_number,
+    price,
+    booked,
+
+  } = formData
   function handleChange(e) {
     const key = e.target.name;
     const value = e.target.value;
@@ -17,6 +25,7 @@ function CreateBike() {
       ...formData,
       [key]: value,
     });
+    console.log(formData)
   }
   function handleCreateBike(e) {
     e.preventDefault();
@@ -52,6 +61,7 @@ function CreateBike() {
                   onChange={handleChange}
                   type="text"
                   name="model"
+                  value={model}
                   className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                   required
                 />
@@ -68,6 +78,7 @@ function CreateBike() {
                   onChange={handleChange}
                   type="number"
                   name="cc"
+                  value={cc}
                   className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                   required
                 />
@@ -84,6 +95,7 @@ function CreateBike() {
               onChange={handleChange}
               type="number"
               name="reg_number"
+              value={reg_number}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               required
             />
@@ -98,10 +110,11 @@ function CreateBike() {
               onChange={handleChange}
               type="number"
               name="price"
+              value={price}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               required
             />
-            <label
+            {/* <label
               for="booked"
               className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
             >
@@ -112,9 +125,10 @@ function CreateBike() {
               onChange={handleChange}
               type="text"
               name="booked"
+              value={booked}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               required
-            />
+            /> */}
             <button
               type="submit"
               className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
