@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { registerOwner } from "../../api/owner/owner";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 
 function RegisterOwner() {
-  const [formData, setFormData] = useState({
+  const [values, setValues] = useState({
     first_name: "",
     last_name: "",
     location: "",
@@ -11,16 +11,30 @@ function RegisterOwner() {
     email: "",
     phone_number: "",
   });
-  function handleChange(e) {
-    const key = e.target.name;
-    const value = e.target.value;
+  const{
+    first_name,
+    last_name,
+    location,
+    avatar,
+    email,
+    phone_number,
+  } = values;
+  
+  // function handleChange(e) {
+  //   const key = e.target.name;
+  //   const value = e.target.value;
 
-    setFormData({
-      ...formData,
-      [key]: value,
-    });
+  //   setValues({
+  //     ...values,
+  //     [key]: value,
+  //   });
+  //   console.log(values)
+  // }
+  const handleChange = (prop) => (event) => {
+    setValues({...values, [prop]: event.target.value})
+    console.log(values)
   }
-  const handleCreateOwner = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     return registerOwner(
       first_name,
@@ -32,6 +46,7 @@ function RegisterOwner() {
     ).then((res) => {
       if (res.status == 200) {
         console.log("Account created");
+        // to("/owners/dashboard")
       } else {
         console.log(res.data.message);
       }
@@ -51,7 +66,7 @@ function RegisterOwner() {
                 </div>
 
                 <div className="lg:col-span-2">
-                  <form onSubmit={handleCreateOwner}>
+                  <form onSubmit={handleSubmit}>
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                       <div className="md:col-span-5">
                         <label for="first_name">First Name</label>
@@ -59,9 +74,9 @@ function RegisterOwner() {
                           type="text"
                           name="first_name"
                           id="first_name"
-                          onChange={handleChange}
+                          onChange={handleChange("first_name")}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={first_name}
                         />
                       </div>
 
@@ -71,9 +86,9 @@ function RegisterOwner() {
                           type="text"
                           name="last_name"
                           id="last_name"
-                          onChange={handleChange}
+                          onChange={handleChange("last_name")}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={last_name}
                           placeholder="email@domain.com"
                         />
                       </div>
@@ -84,9 +99,9 @@ function RegisterOwner() {
                           type="text"
                           name="location"
                           id="location"
-                          onChange={handleChange}
+                          onChange={handleChange("location")}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={location}
                           placeholder=""
                         />
                       </div>
@@ -97,9 +112,9 @@ function RegisterOwner() {
                           type="url"
                           name="avatar"
                           id="avatar"
-                          onChange={handleChange}
+                          onChange={handleChange("avatar")}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={avatar}
                           placeholder=""
                         />
                       </div>
@@ -110,9 +125,9 @@ function RegisterOwner() {
                           type="email"
                           name="email"
                           id="email"
-                          onChange={handleChange}
+                          onChange={handleChange("email")}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={email}
                           placeholder=""
                         />
                       </div>
@@ -123,16 +138,16 @@ function RegisterOwner() {
                           type="number"
                           name="phone_number"
                           id="phone_number"
-                          onChange={handleChange}
+                          onChange={handleChange("phone_number")}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value=""
+                          value={phone_number}
                           placeholder=""
                         />
                       </div>
                       <div className="md:col-span-5 text-right">
                         <div className="inline-flex items-end">
                           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                          <NavLink to="/owner/dashboard">Submit</NavLink>
+                          Submit
                           </button>
                         </div>
                       </div>
