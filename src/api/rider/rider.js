@@ -9,7 +9,7 @@ export const registerRider = async (
     phone_number,
     id_number,
         license_number,
-        spouse_number,
+        spouse_contact,
 ) => {
     return await backendAxios.post('/riders', {
         first_name,
@@ -20,7 +20,7 @@ export const registerRider = async (
         phone_number,
         id_number,
         license_number,
-        spouse_number,
+        spouse_contact,
     });
 };
 
