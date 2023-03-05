@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { registerOwner } from "../../api/owner/owner";
 // import { NavLink } from "react-router-dom";
+import Navigation from "../common/Navigation";
 
 function RegisterOwner() {
   const [values, setValues] = useState({
@@ -55,6 +56,7 @@ function RegisterOwner() {
   };
   return (
     <>
+    <Navigation/>
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
         <div className="container max-w-screen-lg mx-auto">
           <div>
@@ -89,7 +91,7 @@ function RegisterOwner() {
                           onChange={handleChange("last_name")}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={last_name}
-                          placeholder="email@domain.com"
+                          placeholder=""
                         />
                       </div>
 

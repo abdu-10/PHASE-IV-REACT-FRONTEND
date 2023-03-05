@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 //UNIVERSAL DISPLAY
 // app entry point
 import LandingPage from './components/common/LandingPage'
+import AboutUs from './components/common/AboutUs';
 
 // OWNER DASHBOARD
 //dashboard
@@ -40,7 +41,10 @@ function App() {
     <div className="App">
       {/* <LandingPage /> */}
       <Suspense fallback={<h2>Loading, Please wait...</h2>}>
-        <Routes>          
+        <Routes>   
+          {/* GENERAL ROUTE FOR ENTRY  */}
+          <Route path='/' element={<LandingPage/>}/>  
+          <Route path='/aboutus' element={<AboutUs/>}></Route>     
           {/* OWNER DASHBOARD COMPONENTS */}
           <Route path="/owner">
             <Route index={true} element={<RegisterOwner/>}></Route>

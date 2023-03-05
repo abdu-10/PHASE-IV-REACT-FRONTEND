@@ -1,0 +1,25 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+function Preface(){
+    return(
+        <>
+        <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white p-8 sm:p-12">
+  <div class="w-full max-w-xl rounded-2xl bg-violet-50 px-20 py-14">
+    <div class="mx-auto flex max-w-sm flex-col items-center">
+      <h3 class="max-w-2xl text-center text-2xl font-bold leading-tight sm:text-3xl md:text-2xl md:leading-tight">Welcome!</h3>
+      <p class="mt-3 text-center text-black/80">Like you, we are passionate about bikes. Take your pick from our extensive fleet of major brands.</p>
+      <form action="" class="mx-auto mt-6 flex w-full flex-col gap-3 px-5 sm:flex-row">
+      <button type="submit" class="rounded-lg bg-black px-5 py-3 font-bold text-white">
+      <NavLink to="/rider/mybikes">My Bikes</NavLink>
+        </button>
+        <button type="submit" class="rounded-lg bg-black px-5 py-3 font-bold text-white">
+        <NavLink to="/rider/bikes">Browse Bike Catologue</NavLink>
+          </button>
+      </form>
+    </div>
+  </div>
+</div>
+        </>
+    )
+}
+export default Preface

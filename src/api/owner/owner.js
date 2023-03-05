@@ -37,7 +37,8 @@ export const createBike = async (
 export const allRiders = async () => {
     return await backendAxios.get('/riders')
 }
-
+// TODO: REMOVE HARDCODED OWNER_ID
+let owner_id = 2;
 export const myRiders = async (owner_id) => {
     return await backendAxios.get(`/riders/${owner_id}`)
 }

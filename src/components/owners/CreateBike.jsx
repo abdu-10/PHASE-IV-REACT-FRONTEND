@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createBike } from "../../api/owner/owner";
+import NavBar from "./shared/NavBar";
 
 function CreateBike() {
   const [formData, setFormData] = useState({
@@ -39,13 +40,11 @@ function CreateBike() {
   }
   return (
     <>
+      <NavBar/>
       <div className="grid min-h-screen place-items-center">
         <div className="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
           <h1 className="text-xl font-semibold">
-            Hello there ?,{" "}
-            <span className="font-normal">
-              please fill in your Bike information to continue
-            </span>
+            <strong> BIKE  REGISTRATION FORM</strong>
           </h1>
           <form className="mt-6" onSubmit={handleCreateBike}>
             <div className="flex justify-between gap-3">
@@ -93,7 +92,7 @@ function CreateBike() {
             <input
               id="reg_number"
               onChange={handleChange}
-              type="number"
+              type="text"
               name="reg_number"
               value={reg_number}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"

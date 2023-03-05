@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { registerRider } from "../../api/rider/rider";
 import { NavLink } from "react-router-dom";
+import Navigation from "../common/Navigation";
 
 function RegisterRider() {
   const [formData, setFormData] = useState({
@@ -57,6 +58,7 @@ function RegisterRider() {
   }
   return (
     <>
+    <Navigation/>
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
         <div className="container max-w-screen-lg mx-auto">
           <div>
@@ -91,7 +93,7 @@ function RegisterRider() {
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={last_name}
-                          placeholder="email@domain.com"
+                          placeholder=""
                         />
                       </div>
 

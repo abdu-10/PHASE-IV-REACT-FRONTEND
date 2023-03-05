@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import NavBar from "./shared/NavBar";
 import { allRiders } from "../../api/owner/owner";
 import { Typography, Stack, Avatar, Box, LinearProgress } from "@mui/material";
 import CustomTable from "../common/CustomTable";
@@ -52,9 +53,29 @@ function AllRiders() {
       headerName: "Email",
       width: 150,
     },
+    ,
+    {
+      field: "id_number",
+      headerName: "ID Number",
+      width: 150,
+    },
+    ,
+    {
+      field: "license_number",
+      headerName: "License Number",
+      width: 150,
+    },
+    ,
+    {
+      field: "spouse_contact",
+      headerName: "Spouse Contact",
+      width: 150,
+    },
   ]
   return (
     <>
+      {/* TO DO: Add a navigation component on top */}
+      <NavBar/>
       <Stack
         direction="row"
         justifyContent="flex-start"
