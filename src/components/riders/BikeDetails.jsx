@@ -48,7 +48,7 @@ function BikeDetails() {
             </label>
             <input
               id="reg_number"
-              type="number"
+              type="text"
               name="reg_number"
               value="KMDF 678E"
               readOnly={true}
@@ -62,7 +62,7 @@ function BikeDetails() {
             </label>
             <input
               id="price"
-              type="number"
+              type="text"
               name="price"
               value="$9999"
               readOnly={true}

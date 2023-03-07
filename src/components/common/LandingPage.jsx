@@ -12,7 +12,7 @@ function LandingPage() {
               <div className="mx-auto max-w-md px-4 text-center sm:max-w-2xl sm:px-6 lg:flex lg:items-center lg:px-0 lg:text-left">
                 <div className="lg:py-24">
                   <h1 className="mt-4 text-4xl font-bold tracking-tight text-black sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                    <span className="block text-pink-500">Welcome to </span>
+                    <span className="block text-orange-600">Welcome to </span>
                     <span className="block text-black">Bike Fleet</span>
                   </h1>
                   <p className="mt-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
@@ -32,7 +32,7 @@ function LandingPage() {
                     <div className="sm:flex">
                       <div className="min-w-0 flex-1">
                         <button
-                          className="block w-full mr-20 rounded-md bg-gray-500 py-3 px-4 font-medium text-white shadow hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                          className="block w-full mr-20 rounded-md bg-gray-500 py-3 px-4 font-medium text-white shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                           type="button"
                         >
                           <NavLink to="/owner">
@@ -41,7 +41,7 @@ function LandingPage() {
                         </button>
                       </div>
                       <div className="mt-3 sm:mt-0 sm:ml-3">
-                        <button className="block w-full mr-20 rounded-md bg-pink-500 py-3 px-10 font-medium text-white shadow hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
+                        <button className="block w-full mr-20 rounded-md bg-orange-600 py-3 px-10 font-medium text-white shadow hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
                           <NavLink to="/rider">Rider</NavLink>
                         </button>
                       </div>

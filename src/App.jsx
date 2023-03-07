@@ -52,7 +52,8 @@ function App() {
             {/* new bike */}
             <Route path="new-bike" element={<CreateBike/>}/>
             {/* see rider */}
-            <Route path='riders' element={<AllRiders />}>
+            <Route path='riders'>
+              <Route index={true}  element={<AllRiders />}></Route>
               <Route path='view' element={<RiderDetails/>}/>
             </Route>
             {/* see owner rider */}

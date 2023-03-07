@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./shared/NavBar";
 import { allRiders } from "../../api/owner/owner";
-import { Typography, Stack, Avatar, Box, LinearProgress } from "@mui/material";
+import { Typography, Stack, Avatar, Box, LinearProgress, } from "@mui/material";
 import CustomTable from "../common/CustomTable";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+
+import { setCurrentRiderDetail } from "../../features/riders/riderSlice";
+
+
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+
 
 function AllRiders() {
   const [loading, setLoading] = useState(false);
   const [ridersData, setRidersData] = useState([]);
+  const [rowParams, setRowParams] = useState({});
+  const [rowData, setRowData] = useState([]);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  
+
   const fetchRiders = () => {
     setLoading(true);
     allRiders().then((res) => {
@@ -18,6 +35,9 @@ function AllRiders() {
   useEffect(() => {
     fetchRiders();
   }, []);
+  function getRidersFullName(params) {
+    return `${params.row.first_name || ""} ${params.row.surname || ""}`;
+  }
   const columns = [
     {
       field: "first_name",
@@ -27,7 +47,7 @@ function AllRiders() {
         return (
           <>
             <Avatar sx={{ mr: 2 }} src={params.value} alt={params.value} />
-            {params.value}
+            {getRidersFullName(params)};
           </>
         );
       },
@@ -53,28 +73,32 @@ function AllRiders() {
       headerName: "Email",
       width: 150,
     },
-    ,
+    
     {
-      field: "id_number",
-      headerName: "ID Number",
-      width: 150,
-    },
-    ,
-    {
-      field: "license_number",
-      headerName: "License Number",
-      width: 150,
-    },
-    ,
-    {
-      field: "spouse_contact",
-      headerName: "Spouse Contact",
-      width: 150,
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
+      width: 80,
+      renderCell: () => {
+        return (
+          <>
+          <Box display="flex" alignItems="center" textAlign="center">
+              <VisibilityOutlinedIcon
+                sx={{
+                  color: `primary.main`,
+                  mr: 1,
+                  fontSize: "medium",
+                }}
+              />
+            </Box>
+          </>
+        );
+      },
     },
   ]
   return (
     <>
-      {/* TO DO: Add a navigation component on top */}
+      
       <NavBar/>
       <Stack
         direction="row"

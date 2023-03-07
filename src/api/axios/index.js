@@ -5,7 +5,7 @@ import axios from "axios";
 //     baseURL: process.env.VITE_APP_BACKENDAPI,
 // });
 const backendAxios = axios.create({
-    baseURL: "http://localhost:9292/",
+    baseURL: "https://naive-birds-production.up.railway.app/",
 });
 
 export { backendAxios };

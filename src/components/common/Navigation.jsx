@@ -17,7 +17,7 @@ function Navigation() {
           />
         </head>
         <body>
-          <nav className="flex items-center justify-between bg-pink-400 h-20 shadow-2xl">
+          <nav className="flex items-center justify-between bg-orange-600 h-20 shadow-2xl">
             <div className="logo">
               <h1 className="text-black font-style: italic  ml-4 cursor-pointer text-3xl">
                 Bike Fleet
