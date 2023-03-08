@@ -157,7 +157,7 @@ function RiderLogIn() {
             <p className="mt-8">
               Need an account?{" "}
               <Link
-                to="/owner"
+                to="/rider"
                 className="text-blue-500 hover:text-blue-700 font-semibold"
               >
                 Create an account
