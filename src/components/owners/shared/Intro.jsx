@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 function Intro (){
     return (
         <>
-        <div class="lg:px-20 md:px-6 px-4 md:py-12 py-8">
-        <div class="lg:flex items-center justify-between">
-          <div class="lg:w-1/3">
-            <h1 class="text-4xl font-semibold leading-9 text-gray-800 dark:text-black">
+        <div className="lg:px-20 md:px-6 px-4 md:py-12 py-8">
+        <div className="lg:flex items-center justify-between">
+          <div className="lg:w-1/3">
+            <h1 className="text-4xl font-semibold leading-9 text-gray-800 dark:text-black">
               Turn your motorcycles into a business
             </h1>
-            <p class="text-base leading-6 mt-4 text-l-600 dark:text-black">
+            <p className="text-base leading-6 mt-4 text-l-600 dark:text-black">
               List your motorcycle for free and make an average of $100 per
               booking. We strive to turn only the safest riders into renters by
               using technology. .
@@ -17,11 +17,11 @@ function Intro (){
             <button
               role="button"
               aria-label="view catalogue"
-              class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none mt-6 md:mt-8 text-base font-semibold leading-none text-gray-800 dark:text-black flex items-center hover:underline"
+              className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none mt-6 md:mt-8 text-base font-semibold leading-none text-gray-800 dark:text-black flex items-center hover:underline"
             >
               <NavLink to="/owner/new-bike">List Your Motorcycle Today</NavLink>
               <svg
-                class="ml-2 mt-1 dark:text-white"
+                className="ml-2 mt-1 dark:text-white"
                 width="12"
                 height="8"
                 viewBox="0 0 12 8"
@@ -49,28 +49,28 @@ function Intro (){
               </svg>
             </button>
           </div>
-          <div class="lg:w-7/12 lg:mt-10 mt-8">
-            <div class="w-full h-full bg-red-200">
+          <div className="lg:w-7/12 lg:mt-10 mt-8">
+            <div className="w-full h-full bg-red-200">
               <img
                 src="https://rare-gallery.com/uploads/posts/373251-4k-wallpaper.jpg"
                 alt="apartment design"
-                class="w-full sm:block hidden"
+                className="w-full sm:block hidden"
               />
               <img
                 src="https://rare-gallery.com/uploads/posts/373251-4k-wallpaper.jpg"
                 alt="apartment design"
-                class="sm:hidden block w-full"
+                className="sm:hidden block w-full"
               />
             </div>
-            <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 lg:gap-8 gap-6 lg:mt-8 md:mt-6 mt-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 lg:gap-8 gap-6 lg:mt-8 md:mt-6 mt-4">
               <img
                 src="https://badasshelmetstore.com/wp-content/uploads/2020/08/1707849-scaled.jpg"
-                class="w-full"
+                className="w-full"
                 alt="Red Bike"
               />
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQGs8I6iOFqRi7bEGm6QqcJZeREVV0SExZng&usqp=CAU"
-                class="w-full"
+                className="w-full"
                 alt="Bike"
               />
             </div>

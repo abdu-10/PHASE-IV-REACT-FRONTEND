@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { registerOwner } from "../../api/owner/owner";
-// import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import Navigation from "../common/Navigation";
+import NavBar from "./shared/NavBar";
+import { setCurrentOwnerDetail } from "../../features/owners/ownersSlice";
 
 function RegisterOwner() {
+  const dispatch = useDispatch();
+
   const [values, setValues] = useState({
     first_name: "",
     last_name: "",
     location: "",
     avatar: "",
     email: "",
-    phone_number: "",
+    phone_number: 0,
+    password: "",
   });
   const{
     first_name,
@@ -19,22 +25,20 @@ function RegisterOwner() {
     avatar,
     email,
     phone_number,
+    password,
   } = values;
+  const navigate = useNavigate();
   
-  // function handleChange(e) {
-  //   const key = e.target.name;
-  //   const value = e.target.value;
+  function handleChange(e) {
+    const key = e.target.name;
+    const value = e.target.value;
 
-  //   setValues({
-  //     ...values,
-  //     [key]: value,
-  //   });
-  //   console.log(values)
-  // }
-  const handleChange = (prop) => (event) => {
-    setValues({...values, [prop]: event.target.value})
-    console.log(values)
+    setValues({
+      ...values,
+      [key]: value,
+    });
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     return registerOwner(
@@ -43,11 +47,14 @@ function RegisterOwner() {
       location,
       avatar,
       email,
-      phone_number
+      phone_number,
+      password
     ).then((res) => {
       if (res.status == 200) {
-        console.log("Account created");
-        // to("/owners/dashboard")
+        console.log("Account created"); 
+        navigate("/owner/login")
+        dispatch(setCurrentOwnerDetail({currentOwnerDetail: res.data}))       
+        
       } else {
         console.log(res.data.message);
       }
@@ -76,7 +83,7 @@ function RegisterOwner() {
                           type="text"
                           name="first_name"
                           id="first_name"
-                          onChange={handleChange("first_name")}
+                          onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={first_name}
                         />
@@ -88,7 +95,7 @@ function RegisterOwner() {
                           type="text"
                           name="last_name"
                           id="last_name"
-                          onChange={handleChange("last_name")}
+                          onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={last_name}
                           placeholder=""
@@ -101,7 +108,7 @@ function RegisterOwner() {
                           type="text"
                           name="location"
                           id="location"
-                          onChange={handleChange("location")}
+                          onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={location}
                           placeholder=""
@@ -114,7 +121,7 @@ function RegisterOwner() {
                           type="url"
                           name="avatar"
                           id="avatar"
-                          onChange={handleChange("avatar")}
+                          onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={avatar}
                           placeholder=""
@@ -127,7 +134,7 @@ function RegisterOwner() {
                           type="email"
                           name="email"
                           id="email"
-                          onChange={handleChange("email")}
+                          onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={email}
                           placeholder=""
@@ -140,10 +147,22 @@ function RegisterOwner() {
                           type="number"
                           name="phone_number"
                           id="phone_number"
-                          onChange={handleChange("phone_number")}
+                          onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={phone_number}
-                          placeholder=""
+                          placeholder="254722220000"
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label for="password">Enter Prefered Password</label>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          onChange={handleChange}
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={password}
+                          placeholder="******"
                         />
                       </div>
                       <div className="md:col-span-5 text-right">

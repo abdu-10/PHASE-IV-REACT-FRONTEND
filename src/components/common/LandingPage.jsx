@@ -35,14 +35,14 @@ function LandingPage() {
                           className="block w-full mr-20 rounded-md bg-gray-500 py-3 px-4 font-medium text-white shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                           type="button"
                         >
-                          <NavLink to="/owner">
+                          <NavLink to="/owner/login">
                           Owner
                           </NavLink>
                         </button>
                       </div>
                       <div className="mt-3 sm:mt-0 sm:ml-3">
                         <button className="block w-full mr-20 rounded-md bg-orange-600 py-3 px-10 font-medium text-white shadow hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
-                          <NavLink to="/rider">Rider</NavLink>
+                          <NavLink to="/rider/login">Rider</NavLink>
                         </button>
                       </div>
                     </div>

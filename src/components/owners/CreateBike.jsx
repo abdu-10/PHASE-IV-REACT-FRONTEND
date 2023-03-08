@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { selectCurrentOwnerDetail } from "../../features/owners/ownersSlice";
+import { useSelector } from "react-redux"
 import { createBike } from "../../api/owner/owner";
+
 import NavBar from "./shared/NavBar";
 
 function CreateBike() {
+  const currentOwnerDetails = useSelector(selectCurrentOwnerDetail)
+  let owner_id = currentOwnerDetails.id
+  console.log(owner_id)
   const [formData, setFormData] = useState({
     model: "",
     cc: "",
@@ -16,7 +22,6 @@ function CreateBike() {
     reg_number,
     price,
     booked,
-
   } = formData
   function handleChange(e) {
     const key = e.target.name;
@@ -30,7 +35,7 @@ function CreateBike() {
   }
   function handleCreateBike(e) {
     e.preventDefault();
-    return createBike(model, cc, reg_number, price, booked).then((res) => {
+    return createBike(model, cc, reg_number, price, booked, owner_id).then((res) => {
       if (res.status == 200) {
         console.log("Bike created");
       } else {
@@ -107,7 +112,7 @@ function CreateBike() {
             <input
               id="price"
               onChange={handleChange}
-              type="number"
+              type="text"
               name="price"
               value={price}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"

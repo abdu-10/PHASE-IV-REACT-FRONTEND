@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 // import NavBar from "./shared/NavBar";
 import { allBikes } from "../../api/rider/rider";
-import { Typography, Stack, Avatar, Box, LinearProgress, MenuItem, IconButton } from "@mui/material";
+import { Typography, Stack, Avatar, Box, LinearProgress, MenuItem, IconButton} from "@mui/material";
 import CustomTable from "../common/CustomTable";
 import NavPanel from "./joint/NavPanel";
-
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom"
 
@@ -23,16 +23,10 @@ function AllBikes() {
   const handleBikeActionsClick = (params) => (event) => {
     setRowParams(params.row)
     console.log(rowParams)
-    dispatch(setCurrentBikeDetail({ currentBikeDetail: params.row }));    
+    dispatch(setCurrentBikeDetail({ currentBikeDetail: params.row }));  
+    navigate("view")  
   }
-  const handleViewClick = () => {
-    navigate("view", {
-      state: {
-        rowParams,
-      },
-    });
-    console.log(rowParams)
-  };
+ 
 
   const fetchBikes = () => {
     setLoading(true);
@@ -84,7 +78,7 @@ function AllBikes() {
         // console.log(params.row);
         return (
             <IconButton onClick={handleBikeActionsClick(params)}>
-              <MoreVertIcon onClick={handleViewClick}/>
+              <VisibilityOutlinedIcon/>
             </IconButton>
         );
       },

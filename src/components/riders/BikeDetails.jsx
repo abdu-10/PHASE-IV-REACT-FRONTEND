@@ -1,8 +1,105 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentBikeDetail } from "../../features/bikeSlice";
+import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
+import NavPanel from "./joint/NavPanel";
+
+import { bookBike } from "../../api/rider/rider";
+import CustomSnackbar from "../common/CustomSnackbar";
 
 function BikeDetails() {
+  const currentBikeDetails = useSelector(selectCurrentBikeDetail)
+  console.log(currentBikeDetails)
+  const currentRiderDetails = useSelector(selectCurrentRiderDetail)
+  let rider_id = currentRiderDetails.id
+  let bike_id = currentBikeDetails.id
+  const [values, setValues] = useState(
+    {
+      model:"",
+      cc: "",
+      reg_number: "",
+      price: "",
+      booked: "",
+      
+      snackbarMessage: "",
+        openSnackbar: false,
+        snackbarSeverity: "success",
+    }
+  ) 
+  const {
+    model,
+    cc,
+    reg_number,
+    price,
+    booked,
+
+    snackbarMessage,
+    openSnackbar,
+    snackbarSeverity
+  } = values
+
+  function handleBookBike(){
+    console.log(rider_id, bike_id)
+    return bookBike(rider_id, bike_id)    
+    .then((res) =>{
+      if (res.status === 200 || res.status === 201){
+        setValues({
+          ...values,
+          snackbarMessage: "Biked booked Successfully!",
+          openSnackbar: true,
+          snackbarSeverity: "success",
+        });
+      }else{
+        setValues({
+          ...values,
+          snackbarMessage: res.data.message,
+          openSnackbar: true,
+          snackbarSeverity: "error",
+        });
+      }
+  })
+  
+
+  }
+  const closeSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setValues({ ...values, openSnackbar: false });
+};
+
+  
+  // prepopulate our form with data in state
+  useEffect( () => {
+    const {
+      model,
+      cc,
+      reg_number,
+      price,
+      booked,
+    } = currentBikeDetails
+    setValues({
+      ...values,
+      model,
+      cc,
+      reg_number,
+      price,
+      booked,
+
+      snackbarMessage,
+    openSnackbar,
+    snackbarSeverity
+    })
+  }, []);
   return (
     <>
+    <NavPanel/>
+    <CustomSnackbar
+          openSnackbar={openSnackbar}
+          handleClose={closeSnackbar}
+          snackbarMessage={snackbarMessage}
+          snackbarSeverity={snackbarSeverity}
+        />
       <div className="grid min-h-screen place-items-center">
         <div className="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
           <form className="mt-6">
@@ -18,7 +115,7 @@ function BikeDetails() {
                   id="model"
                   type="text"
                   name="model"
-                  value="Kawasaki"
+                  value={model}
                   readOnly={true}
                   className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                 />
@@ -34,7 +131,7 @@ function BikeDetails() {
                   id="cc"
                   type="number"
                   name="cc"
-                  value="650"
+                  value={cc}
                   readOnly={true}
                   className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                 />
@@ -50,7 +147,7 @@ function BikeDetails() {
               id="reg_number"
               type="text"
               name="reg_number"
-              value="KMDF 678E"
+              value={reg_number}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -64,7 +161,7 @@ function BikeDetails() {
               id="price"
               type="text"
               name="price"
-              value="$9999"
+              value={price}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -78,11 +175,14 @@ function BikeDetails() {
               id="booked"
               type="text"
               name="booked"
-              value="True"
+              value={booked}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
           </form>
+          <button onClick={handleBookBike} class="bg-blue-500 hover:bg-blue-700 mt-3 text-white font-bold py-2 px-4 rounded">
+  Book
+</button>
         </div>
       </div>
       ;

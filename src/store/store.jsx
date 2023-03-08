@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import bikeSlice from "../features/bikeSlice";
+import ownersSlice from "../features/owners/ownersSlice";
 
 const persistConfig = {
     key: "root",
@@ -13,6 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     rider: riderSlice,
     bike: bikeSlice,
+    owner: ownersSlice,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

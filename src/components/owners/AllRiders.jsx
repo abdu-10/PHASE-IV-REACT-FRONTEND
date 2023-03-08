@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./shared/NavBar";
 import { allRiders } from "../../api/owner/owner";
-import { Typography, Stack, Avatar, Box, LinearProgress, } from "@mui/material";
+import { Typography, Stack, IconButton, Avatar, Box, LinearProgress, } from "@mui/material";
 import CustomTable from "../common/CustomTable";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -21,6 +21,13 @@ function AllRiders() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleRiderActionClick = (params) => (event) => {
+    setRowParams(params.row)
+    console.log(rowParams)
+    dispatch(setCurrentRiderDetail({currentRiderDetail: params.row}))
+    navigate("view")
+  }
 
   
 
@@ -73,28 +80,42 @@ function AllRiders() {
       headerName: "Email",
       width: 150,
     },
-    
     {
       field: "actions",
       type: "actions",
       headerName: "Actions",
       width: 80,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
-          <>
-          <Box display="flex" alignItems="center" textAlign="center">
-              <VisibilityOutlinedIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-            </Box>
-          </>
+          <IconButton onClick={handleRiderActionClick(params)}>
+            <VisibilityOutlinedIcon />
+          </IconButton>
         );
       },
     },
+    
+    // {
+    //   field: "actions",
+    //   type: "actions",
+    //   headerName: "Actions",
+    //   width: 80,
+    //   renderCell: (params) => {
+    //     return (
+    //       // on click on the viw, user is able to see the rider deatils in depth
+    //       <div onClick={handleRiderActionClick(params)}>
+    //       <Box display="flex" alignItems="center" textAlign="center" >
+    //           <VisibilityOutlinedIcon
+    //             sx={{
+    //               color: `primary.main`,
+    //               mr: 1,
+    //               fontSize: "medium",
+    //             }}
+    //           />
+    //         </Box>
+    //       </div>
+    //     );
+    //   },
+    // },
   ]
   return (
     <>

@@ -1,11 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import NavBar from "./shared/NavBar";
+
+import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
 
 function RiderDetails() {
+  const [values, setValues] = useState(
+    {
+      first_name: "",
+      last_name: "",
+      location: "",
+      avatar: "",
+      email: "",
+      phone_number: "",
+      id_number: "",
+      license_number: "",
+      spouse_contact: "",
+    }
+  )
+  const {
+    first_name,
+    last_name,
+    location,
+    avatar,
+    email,
+    phone_number,
+    id_number,
+    license_number,
+    spouse_contact,
+  } = values
+
+  const currentRiderDetails = useSelector(selectCurrentRiderDetail)
+  console.log(currentRiderDetails)
+  // prepopulate our form with data in state
+  useEffect( () => {
+    const {
+      first_name,
+      last_name,
+      location,
+      avatar,
+      email,
+      phone_number,
+      id_number,
+      license_number,
+      spouse_contact,
+    } = currentRiderDetails
+    setValues({
+      ...values,
+      first_name,
+      last_name,
+      location,
+      avatar,
+      email,
+      phone_number,
+      id_number,
+      license_number,
+      spouse_contact,
+    })
+  }, []);
   return (
     <>
-      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+    <NavBar/>
+      <div className="bg-white shadow-md rounded mt-20 px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <div className="-mx-3 md:flex mb-6">
+          <div className="md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               for="first_name"
               className="block text-xs font-semibold text-gray-600 uppercase"
@@ -16,7 +74,7 @@ function RiderDetails() {
               id="first_name"
               type="text"
               name="first_name"
-              value="Njoroge"
+              value={first_name}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -30,7 +88,7 @@ function RiderDetails() {
               id="location"
               type="text"
               name="location"
-              value="Mathare"
+              value={location}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -44,7 +102,7 @@ function RiderDetails() {
               id="email"
               type="email"
               name="email"
-              value="njoki@gmail.com"
+              value={email}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -58,7 +116,7 @@ function RiderDetails() {
               id="id_number"
               type="text"
               name="id_number"
-              value="36876709"
+              value={id_number}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -72,12 +130,12 @@ function RiderDetails() {
               id="spouse_number"
               type="text"
               name="phone_number"
-              value="+2547347894749"
+              value={phone_number}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
           </div>
-          <div class="md:w-1/2 px-3">
+          <div className="md:w-1/2 px-3">
             <label
               for="last_name"
               className="block text-xs font-semibold text-gray-600 uppercase"
@@ -88,7 +146,7 @@ function RiderDetails() {
               id="last_name"
               type="text"
               name="last_name"
-              value="Njoki"
+              value={last_name}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -102,7 +160,7 @@ function RiderDetails() {
               id="avatar"
               type="url"
               name="avatar"
-              value="Avatar"
+              value={avatar}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -116,7 +174,7 @@ function RiderDetails() {
               id="phone_number"
               type="text"
               name="phone_number"
-              value="+254734789534"
+              value={phone_number}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -127,10 +185,10 @@ function RiderDetails() {
               Driver license
             </label>
             <input
-              id="driver_license"
+              id="license_number"
               type="text"
-              name="driver_license"
-              value="7748930"
+              name="license_number"
+              value={license_number}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />

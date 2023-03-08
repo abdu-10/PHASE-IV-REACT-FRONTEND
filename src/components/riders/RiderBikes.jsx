@@ -4,9 +4,14 @@ import { riderBikes } from "../../api/rider/rider";
 import { Typography, Stack, Avatar, Box, LinearProgress } from "@mui/material";
 import CustomTable from "../common/CustomTable";
 import NavPanel from "./joint/NavPanel";
+import { useSelector } from "react-redux";
+import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
 
 
 function RiderBikes() {
+  const currentRiderDetails = useSelector(selectCurrentRiderDetail)
+let rider_id = currentRiderDetails.id
+console.log(rider_id)
   const [loading, setLoading] = useState(false);
   const [riderBikesData, setRiderBikesData] = useState([]);
   const fetchRiderBikes = () => {
@@ -17,9 +22,6 @@ function RiderBikes() {
       setLoading(false);
     });    
   };
-
-  // TODO: REMOVE HARDCODER RIDER_ID
-  let rider_id = 4;
 
   useEffect(() => {
     fetchRiderBikes();

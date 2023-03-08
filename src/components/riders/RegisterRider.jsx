@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { registerRider } from "../../api/rider/rider";
-import { NavLink } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Navigation from "../common/Navigation";
 
 function RegisterRider() {
+  
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -14,6 +16,7 @@ function RegisterRider() {
     id_number: "",
     license_number: "",
     spouse_number: "",
+    password: "",
   });
   const {
     first_name,
@@ -25,6 +28,7 @@ function RegisterRider() {
     id_number,
     license_number,
     spouse_number,
+    password,
   } = formData
   function handleChange(e) {
     const key = e.target.name;
@@ -34,7 +38,7 @@ function RegisterRider() {
       ...formData,
       [key]: value,
     });
-      console.log(formData)
+  
   } 
   function handleSubmit(e) {
     e.preventDefault();
@@ -47,10 +51,12 @@ function RegisterRider() {
       phone_number,
       id_number,
       license_number,
-      spouse_number
+      spouse_number,
+      password
     ).then((res) => {
       if (res.status == 200) {
         console.log("Account created");
+        navigate("/rider/login")        
       } else {
         console.log(res.data.message);
       }
@@ -181,6 +187,18 @@ function RegisterRider() {
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={spouse_number}
+                          placeholder=""
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label for="password">Enter Preferred Password</label>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          onChange={handleChange}
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={password}
                           placeholder=""
                         />
                       </div>

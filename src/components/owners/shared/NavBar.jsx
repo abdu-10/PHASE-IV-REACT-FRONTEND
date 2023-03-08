@@ -1,15 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-function NavBar(){
+function NavBar(avatar){
+  console.log(avatar)
     return (
         <>
         <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <img
+          <NavLink to="/"><img
             src="https://cdn3.vectorstock.com/i/1000x1000/46/22/motorcycle-logo-for-rent-vector-25604622.jpg"
             className="h-6 mr-3 sm:h-9"
             alt="Flowbite Logo"
           />
+          </NavLink>
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             Bike Fleet
           </span>
@@ -17,7 +19,7 @@ function NavBar(){
           <div className="flex md:order-2">
             <img
               class="w-10 h-10 rounded"
-              src="/docs/images/people/profile-picture-5.jpg"
+              src={avatar}
               alt="Default avatar"
             />
             <button
