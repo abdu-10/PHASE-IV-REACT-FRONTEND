@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { selectCurrentOwnerDetail } from "../../features/owners/ownersSlice";
 import { useSelector } from "react-redux"
 import { createBike } from "../../api/owner/owner";
@@ -14,14 +14,16 @@ function CreateBike() {
     cc: "",
     reg_number: "",
     price: "",
-    booked: false,
+    location: "",
+    image_url: "",
   });
   const {
     model,
     cc,
     reg_number,
     price,
-    booked,
+    location,
+    image_url,
   } = formData
   function handleChange(e) {
     const key = e.target.name;
@@ -35,9 +37,10 @@ function CreateBike() {
   }
   function handleCreateBike(e) {
     e.preventDefault();
-    return createBike(model, cc, reg_number, price, booked, owner_id).then((res) => {
-      if (res.status == 200) {
+    return createBike(model, cc, reg_number, price, owner_id, location, image_url).then((res) => {
+      if (res.status == 201) {
         console.log("Bike created");
+        navigate("/owner/dashboard");  
       } else {
         console.log(res.data.message);
       }
@@ -87,7 +90,10 @@ function CreateBike() {
                   required
                 />
               </span>
+              
             </div>
+            <div className="flex justify-between gap-3">
+            <span className="w-1/2">
             <label
               for="reg_number"
               className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
@@ -103,6 +109,8 @@ function CreateBike() {
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               required
             />
+            </span>
+            <span className="w-1/2">
             <label
               for="price"
               className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
@@ -118,21 +126,44 @@ function CreateBike() {
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               required
             />
-            {/* <label
-              for="booked"
+            </span>
+            </div>
+            <div className="flex justify-between gap-3">
+            <span className="w-1/2">
+            <label
+              for="location"
               className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
             >
-              Booked
+              Location
             </label>
             <input
-              id="booked"
+              id="location"
               onChange={handleChange}
               type="text"
-              name="booked"
-              value={booked}
+              name="location"
+              value={location}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               required
-            /> */}
+            />
+            </span>
+            <span className="w-1/2">
+             <label
+              for="image_url"
+              className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
+            >
+              Image
+            </label>
+            <input
+              id="image_url"
+              onChange={handleChange}
+              type="text"
+              name="image_url"
+              value={image_url}
+              className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+              required
+            />
+            </span>
+            </div>
             <button
               type="submit"
               className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"

@@ -10,17 +10,15 @@ import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
 
 function RiderBikes() {
   const currentRiderDetails = useSelector(selectCurrentRiderDetail)
-let rider_id = currentRiderDetails.id
-console.log(rider_id)
+  let rider_id = currentRiderDetails.id
   const [loading, setLoading] = useState(false);
   const [riderBikesData, setRiderBikesData] = useState([]);
-  const fetchRiderBikes = () => {
+  const fetchRiderBikes = async () => {
     setLoading(true);
-    riderBikes(rider_id).then((res) => {
-      setRiderBikesData(res.data)
-      console.log(res.data)
+    const payload = await riderBikes(rider_id)    
+    setRiderBikesData(payload.data.map( entry => entry.bike ))
       setLoading(false);
-    });    
+       
   };
 
   useEffect(() => {

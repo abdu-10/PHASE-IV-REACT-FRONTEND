@@ -1,30 +1,26 @@
 import { backendAxios } from "../axios";
 
 export const registerOwner = async (
-  first_name,
-  last_name,
-  location,
-  avatar,
-  email,
-  phone_number,
-  password
-) => {
-  return await backendAxios.post("/owners", {
-    first_name,
-    last_name,
-    location,
-    avatar,
-    email,
+  full_name,
+    username,
     phone_number,
     password,
+    password_confirmation,
+) => {
+  return await backendAxios.post("/owners", {
+    full_name,
+    username,
+    phone_number,
+    password,
+    password_confirmation,
   });
 };
 export const logInOwner = async (    
-    email,
+    username,
     password
   ) => {
     return await backendAxios.post("/login", {
-        email,
+        username,
         password
     });
 };
@@ -34,16 +30,18 @@ export const createBike = async (
   cc,
   reg_number,
   price,
-  booked,
-  owner_id
+  owner_id,
+  location,
+  image_url
 ) => {
   return await backendAxios.post("/bikes", {
     model,
     cc,
     reg_number,
     price,
-    booked,
     owner_id,
+    location,
+  image_url
   });
 };
 
@@ -53,7 +51,7 @@ export const allRiders = async () => {
 // TODO: REMOVE HARDCODED OWNER_ID
 let owner_id = 2;
 export const myRiders = async (owner_id) => {
-  return await backendAxios.get(`/riders/${owner_id}`);
+  return await backendAxios.get(`/rider_bikes/riders/${owner_id}`);
 };
 export const riderDetails = async (rider_id) => {
   return await backendAxios.get(`/riders/${rider_id}`);

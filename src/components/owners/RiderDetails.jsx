@@ -7,27 +7,25 @@ import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
 function RiderDetails() {
   const [values, setValues] = useState(
     {
-      first_name: "",
-      last_name: "",
-      location: "",
-      avatar: "",
-      email: "",
-      phone_number: "",
-      id_number: "",
-      license_number: "",
-      spouse_contact: "",
+      full_name: "",
+    username: "",
+    email: "",
+    date_of_birth: "",
+    phone_number: "",
+    id_number: "",
+    licence_number: "",
+    spouse_contact: "",
     }
   )
   const {
-    first_name,
-    last_name,
-    location,
-    avatar,
-    email,
+    full_name,
+    username,
     phone_number,
     id_number,
-    license_number,
+    licence_number,
     spouse_contact,
+    email,
+    date_of_birth,
   } = values
 
   const currentRiderDetails = useSelector(selectCurrentRiderDetail)
@@ -35,27 +33,25 @@ function RiderDetails() {
   // prepopulate our form with data in state
   useEffect( () => {
     const {
-      first_name,
-      last_name,
-      location,
-      avatar,
-      email,
-      phone_number,
-      id_number,
-      license_number,
-      spouse_contact,
+      full_name,
+    username,
+    phone_number,
+    id_number,
+    licence_number,
+    spouse_contact,
+    email,
+    date_of_birth,
     } = currentRiderDetails
     setValues({
       ...values,
-      first_name,
-      last_name,
-      location,
-      avatar,
-      email,
-      phone_number,
-      id_number,
-      license_number,
-      spouse_contact,
+      full_name,
+    username,
+    phone_number,
+    id_number,
+    licence_number,
+    spouse_contact,
+    email,
+    date_of_birth,
     })
   }, []);
   return (
@@ -68,27 +64,27 @@ function RiderDetails() {
               for="first_name"
               className="block text-xs font-semibold text-gray-600 uppercase"
             >
-              First Name
+              Full Name
             </label>
             <input
-              id="first_name"
+              id="full_name"
               type="text"
-              name="first_name"
-              value={first_name}
+              name="full_name"
+              value={full_name}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
             <label
-              for="location"
+              for="username"
               className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
             >
-              Location
+              User Name
             </label>
             <input
-              id="location"
+              id="username"
               type="text"
-              name="location"
-              value={location}
+              name="username"
+              value={username}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -121,49 +117,36 @@ function RiderDetails() {
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
             <label
-              for="spouse_number"
+              for="spouse_contact"
               className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
             >
               Spouse Number
             </label>
             <input
-              id="spouse_number"
+              id="spouse_contact"
               type="text"
-              name="phone_number"
-              value={phone_number}
+              name="spouse_contact"
+              value={spouse_contact}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
           </div>
           <div className="md:w-1/2 px-3">
             <label
-              for="last_name"
+              for="date_of_birth"
               className="block text-xs font-semibold text-gray-600 uppercase"
             >
-              Last Name
+              DOB
             </label>
             <input
-              id="last_name"
+              id="date_of_birth"
               type="text"
-              name="last_name"
-              value={last_name}
+              name="date_of_birth"
+              value={date_of_birth}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
-            <label
-              for="avatar"
-              className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-            >
-              Avatar
-            </label>
-            <input
-              id="avatar"
-              type="url"
-              name="avatar"
-              value={avatar}
-              readOnly={true}
-              className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
-            />
+            
             <label
               for="phone_number"
               className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
@@ -185,10 +168,10 @@ function RiderDetails() {
               Driver license
             </label>
             <input
-              id="license_number"
+              id="licence_number"
               type="text"
-              name="license_number"
-              value={license_number}
+              name="licence_number"
+              value={licence_number}
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />

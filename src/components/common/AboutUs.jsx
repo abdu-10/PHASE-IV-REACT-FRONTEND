@@ -29,7 +29,7 @@ function AboutUs() {
               <p className="mt-4 text-gray-600">
                 {" "}
                 Bike Fleet works to build a safe and friendly community of
-                motorcycle riders. We using advanced data to vet riders and
+                motorcycle riders. We are using advanced data to vet riders and
                 ensure only the safest book your motorcycle. Our mission is to
                 support the motorcycle community by making access to motorcycles
                 more affordable. To fulfill this mission, everybody in our team

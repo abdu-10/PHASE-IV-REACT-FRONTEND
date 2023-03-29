@@ -7,28 +7,28 @@ function RegisterRider() {
   
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    location: "",
-    avatar: "",
+    full_name: "",
+    username: "",
     email: "",
-    phone_number: "",
+    date_of_birth: "",
+    phone_number: 0,
+    password: "",
+    password_confirmation: "",
     id_number: "",
     license_number: "",
-    spouse_number: "",
-    password: "",
+    spouse_contact: "",
   });
   const {
-    first_name,
-    last_name,
-    location,
-    avatar,
-    email,
+    full_name,
+    username,
     phone_number,
+    password,
+    password_confirmation,
     id_number,
     license_number,
-    spouse_number,
-    password,
+    spouse_contact,
+    email,
+    date_of_birth,
   } = formData
   function handleChange(e) {
     const key = e.target.name;
@@ -43,16 +43,16 @@ function RegisterRider() {
   function handleSubmit(e) {
     e.preventDefault();
     return registerRider(
-      first_name,
-      last_name,
-      location,
-      avatar,
-      email,
-      phone_number,
-      id_number,
-      license_number,
-      spouse_number,
-      password
+      full_name,
+    username,
+    phone_number,
+    password,
+    password_confirmation,
+    id_number,
+    license_number,
+    spouse_contact,
+    email,
+    date_of_birth,
     ).then((res) => {
       if (res.status == 200) {
         console.log("Account created");
@@ -79,31 +79,31 @@ function RegisterRider() {
                   <form onSubmit={handleSubmit}>
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                       <div className="md:col-span-5">
-                        <label for="first_name">First Name</label>
+                        <label for="full_name">Full Name</label>
                         <input
                           type="text"
-                          name="first_name"
-                          id="first_name"
+                          name="full_name"
+                          id="full_name"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={first_name}
+                          value={full_name}
                         />
                       </div>
 
                       <div className="md:col-span-5">
-                        <label for="last_name">Last Name</label>
+                        <label for="username">Username</label>
                         <input
                           type="text"
-                          name="last_name"
-                          id="last_name"
+                          name="username"
+                          id="username"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={last_name}
+                          value={username}
                           placeholder=""
                         />
                       </div>
 
-                      <div className="md:col-span-3">
+                      {/* <div className="md:col-span-3">
                         <label for="location">Location</label>
                         <input
                           type="text"
@@ -114,9 +114,9 @@ function RegisterRider() {
                           value={location}
                           placeholder=""
                         />
-                      </div>
+                      </div> */}
 
-                      <div className="md:col-span-2">
+                      {/* <div className="md:col-span-2">
                         <label for="avatar">Avatar</label>
                         <input
                           type="url"
@@ -127,7 +127,7 @@ function RegisterRider() {
                           value={avatar}
                           placeholder=""
                         />
-                      </div>
+                      </div> */}
 
                       <div className="md:col-span-2">
                         <label for="email">Email</label>
@@ -167,11 +167,11 @@ function RegisterRider() {
                         />
                       </div>
                       <div className="md:col-span-2">
-                        <label for="driver_license">Driver License</label>
+                        <label for="license_number">Driver License</label>
                         <input
                           type="number"
                           name="license_number"
-                          id="driver license"
+                          id="license_number"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={license_number}
@@ -179,14 +179,14 @@ function RegisterRider() {
                         />
                       </div>
                       <div className="md:col-span-2">
-                        <label for="spouse_number">Spouse Number</label>
+                        <label for="spouse_contact">Spouse Number</label>
                         <input
                           type="number"
-                          name="spouse_number"
-                          id="spouse_number"
+                          name="spouse_contact"
+                          id="spouse_contact"
                           onChange={handleChange}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={spouse_number}
+                          value={spouse_contact}
                           placeholder=""
                         />
                       </div>
@@ -200,6 +200,30 @@ function RegisterRider() {
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           value={password}
                           placeholder=""
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label for="password_confirmation">Enter  Password Again</label>
+                        <input
+                          type="password"
+                          name="password_confirmation"
+                          id="password_confirmation"
+                          onChange={handleChange}
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={password_confirmation}
+                          placeholder=""
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label for="date_of_birth">Date of Birth</label>
+                        <input
+                          type="date"
+                          name="date_of_birth"
+                          id="date_of_birth"
+                          onChange={handleChange}
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={date_of_birth}
+                          placeholder="YYYY-MM-DD"
                         />
                       </div>
                       <div className="md:col-span-5 text-right">

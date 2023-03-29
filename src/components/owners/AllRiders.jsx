@@ -47,27 +47,26 @@ function AllRiders() {
   }
   const columns = [
     {
-      field: "first_name",
-      headerName: "First Name",
-      width: 250,
+      field: "avatar",
+      headerName: "Avatar",
+      width: 50,
       renderCell: (params) => {
         return (
           <>
-            <Avatar sx={{ mr: 2 }} src={params.value} alt={params.value} />
-            {getRidersFullName(params)};
+            <Avatar sx={{ mr: 2 }} src={params.value} alt={params.value} />            
           </>
         );
       },
     },
     {
-      field: "last_name",
-      headerName: "Surname",
-      width: 150,
+      field: "full_name",
+      headerName: "Rider Name",
+      width: 250,
       
     },
     {
-      field: "location",
-      headerName: "Location",
+      field: "date_of_birth",
+      headerName: "DOB",
       width: 150,
     },
     {
@@ -78,6 +77,11 @@ function AllRiders() {
     {
       field: "email",
       headerName: "Email",
+      width: 150,
+    },
+    {
+      field: "licence_number",
+      headerName: "Driver License",
       width: 150,
     },
     {

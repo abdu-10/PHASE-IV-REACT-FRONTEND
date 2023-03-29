@@ -3,9 +3,11 @@ import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 import PreventRowOverlay from "./PreventRowOverLay";
+import { useEffect } from "react";
 
 const CustomTable = ({ rows, columns }) => {
   const [pageSize, setPageSize] = useState(5);
+  
 
   return (
     <>
@@ -18,7 +20,7 @@ const CustomTable = ({ rows, columns }) => {
         }}
       >
         <DataGrid
-          getRowId={(row) => row.code || row.id}
+          getRowId={(row) => row.id}
           rows={rows}
           columns={columns}
           autoHeight

@@ -12,12 +12,12 @@ function LogIn() {
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({        
-        email: "",
+        username: "",
         password: "",
     });
 
     const {
-      email,
+      username,
       password,
     } = formData
 
@@ -35,7 +35,7 @@ function LogIn() {
     function handleSubmit(e) {
         e.preventDefault();
         return logInOwner(
-          email,
+          username,
           password
         ).then((res) => {
           if (res.data.id) {
@@ -73,13 +73,13 @@ function LogIn() {
 
             <form onSubmit={handleSubmit} className="mt-6" action="#" method="POST">
               <div>
-                <label className="block text-gray-700">Email Address</label>
+                <label className="block text-gray-700">Username</label>
                 <input
-                  type="email"
+                  type="text"
                   onChange={handleChange}
-                  value={email}
-                  name="email"
-                  placeholder="Enter Email Address"
+                  value={username}
+                  name="username"
+                  placeholder="john_doe"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                   autofocus
                   autocomplete
@@ -94,7 +94,7 @@ function LogIn() {
                   name="password"
                   value={password}
                   onChange={handleChange}
-                  placeholder="Enter Password"
+                  placeholder="******"
                   minlength="6"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                 focus:bg-white focus:outline-none"

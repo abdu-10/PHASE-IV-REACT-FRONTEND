@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense,useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 //UNIVERSAL DISPLAY
 // app entry point
@@ -38,6 +38,17 @@ const RiderBikes = lazy(() =>
   import("./components/riders/RiderBikes")
 )
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // auto-login
+    fetch("/o-me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+  console.log(user)
 
   return (
     <div className="App">

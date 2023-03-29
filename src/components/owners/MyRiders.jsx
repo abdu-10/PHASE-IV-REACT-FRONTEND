@@ -6,25 +6,26 @@ import { myRiders } from "../../api/owner/owner";
 
 function MyRiders() {
   // TO DO: REPLACE HARD CODED OWNER ID WITH OWNER_ID IN STATE
-  let owner_id = 2;
+  let owner_id = 1;
   const [loading, setLoading] = useState(false);
   const [myRidersData, setMyRidersData] = useState([]);
-  const fetchMyRiders = () => {
+  const fetchMyRiders = async () => {
     setLoading(true);
-    myRiders(owner_id).then((res) => {
-      setMyRidersData(res.data)
+    const payload = await myRiders(owner_id)    
+    setMyRidersData(payload.data.map( entry => entry.rider ))
       setLoading(false);
-    });    
+       
   };
 
 
+
   useEffect(() => {
-    fetchMyRiders();
+    fetchMyRiders();    
   }, []);
   const columns = [
     {
-      field: "first_name",
-      headerName: "First Name",
+      field: "full_name",
+      headerName: "Full Name",
       width: 250,
       renderCell: (params) => {
         return (
@@ -36,14 +37,8 @@ function MyRiders() {
       },
     },
     {
-      field: "last_name",
-      headerName: "Surname",
-      width: 150,
-      
-    },
-    {
-      field: "location",
-      headerName: "Location",
+      field: "date_of_birth",
+      headerName: "DOB",
       width: 150,
     },
     {

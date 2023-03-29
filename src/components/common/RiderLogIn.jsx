@@ -13,7 +13,7 @@ function RiderLogIn() {
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({        
-        email: "",
+        username: "",
         password: "",
 
        snackbarMessage: "",
@@ -22,7 +22,7 @@ function RiderLogIn() {
     });
 
     const {
-      email,
+      username,
       password,
 
       snackbarMessage,
@@ -44,7 +44,7 @@ function RiderLogIn() {
     function handleSubmit(e) {
         e.preventDefault();
         return logInOwner(
-          email,
+          username,
           password
         ).then((res) => {
           if (res.data.id) {
@@ -105,13 +105,13 @@ function RiderLogIn() {
 
             <form onSubmit={handleSubmit} className="mt-6" action="#" method="POST">
               <div>
-                <label className="block text-gray-700">Email Address</label>
+                <label className="block text-gray-700">User Name</label>
                 <input
-                  type="email"
+                  type="text"
                   onChange={handleChange}
-                  value={email}
-                  name="email"
-                  placeholder="Enter Email Address"
+                  value={username}
+                  name="username"
+                  placeholder="Enter User Name"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                   autofocus
                   autocomplete
