@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { selectCurrentOwnerDetail } from "../../features/owners/ownersSlice";
 import { useSelector } from "react-redux"
 import { createBike } from "../../api/owner/owner";
+import { useNavigate } from "react-router-dom";
 
 import NavBar from "./shared/NavBar";
 
 function CreateBike() {
+  const navigate = useNavigate();
   const currentOwnerDetails = useSelector(selectCurrentOwnerDetail)
   let owner_id = currentOwnerDetails.id
   console.log(owner_id)

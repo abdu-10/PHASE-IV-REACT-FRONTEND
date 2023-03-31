@@ -1,27 +1,158 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-function NavBar(avatar){
-  console.log(avatar)
+import React, { useState } from "react";
+import { Navigate, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
+import {
+  Typography,
+  Stack,
+  Avatar,
+  Box,
+  LinearProgress,
+  Menu,
+  MenuItem,
+  IconButton,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { CoPresentOutlined, Logout } from "@mui/icons-material";
+// import { logOut } from "../../../api/owner/owner";
+
+function NavBar() {
+  const [selectedOption, setSelectedOption] =  useState("")
+  const [anchMenu, setAnchMenu] = useState(null)
+  const handleAccountActionsClick = () => (event) => {
+    // setSelectedOption(params);
+    console.log("clicked")
+    setAnchMenu(event.currentTarget);
+  }
+  const handleCloseMenu = () => {
+    setAnchMenu(null);
+  };
+
+  const handleMenuItemClick = (prop) => {
+    // console.log(`${prop} click params`, rowParams);
+    handleCloseMenu();
+    if (prop === "view") {
+      // dispatch(setCurrentOwnerDetail({ currentOwnerDetail: rowParams }));
+      setOpenOwnerDetails(true);
+    } else if (prop === "edit") {
+      
+      // dispatch(setCurrentOwnerDetail({ currentOwnerDetail: rowParams }));
+    }else if (prop === "delete"){
+      console.log("clicked")
+      // dispatch(setCurrentOwnerDetail({ currentOwnerDetail: rowParams }));
+      // logOut().then((res) =>{
+      //   if (res.status === 204){
+      //     Navigate("/")
+      //   }
+      // })
+
+
+    } else
+    handleCloseMenu();
+  };
+
+  const AccountDetails = () => {
     return (
-        <>
-        <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+      <>
+        {" "}
+        {/* <OwnerDetails
+          openOwnerDetails={openOwnerDetails}
+          closeOwnerDetails={closeOwnerDetails}
+        />{" "}
+        <DeleteAccount
+          openDeleteAccount={openDeleteAccount}
+          closeDeleteModal={closeDeleteModal}
+          Owner_code={rowParams.code}
+          // deactivationStatus={deactivationStatus}
+          // fetchStays={fetchOwner}
+        /> */}
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchMenu}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          open={Boolean(anchMenu)}
+          onClose={handleCloseMenu}
+        >
+            <MenuItem onClick={() => handleMenuItemClick("edit")}>
+            <Box display="flex" alignItems="center" textAlign="center">
+              <EditIcon
+                sx={{
+                  color: `primary.main`,
+                  mr: 1,
+                  fontSize: "medium",
+                }}
+              />
+              Edit Account Details
+            </Box>
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("view")}>
+            <Box display="flex" alignItems="center" textAlign="center">
+              <VisibilityOutlinedIcon
+                sx={{
+                  color: `primary.main`,
+                  mr: 1,
+                  fontSize: "medium",
+                }}
+              />
+              View Account Details
+            </Box>
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("add-students")}>
+            <Box display="flex" alignItems="center" textAlign="center">
+              <LogoutIcon
+                sx={{
+                  color: `primary.main`,
+                  mr: 1,
+                  fontSize: "medium",
+                }}
+              />
+              Log Out
+            </Box>
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("add-students")}>
+            <Box display="flex" alignItems="center" textAlign="center">
+              <DeleteIcon
+                sx={{
+                  color: `primary.main`,
+                  mr: 1,
+                  fontSize: "medium",
+                }}
+              />
+              Delete Account permanently
+            </Box>
+          </MenuItem>
+        </Menu>{" "}
+      </>
+    );
+  };
+  
+  return (
+    <>
+      <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <NavLink to="/"><img
-            src="https://cdn3.vectorstock.com/i/1000x1000/46/22/motorcycle-logo-for-rent-vector-25604622.jpg"
-            className="h-6 mr-3 sm:h-9"
-            alt="Flowbite Logo"
-          />
+          <NavLink to="/">
+            <img
+              src="https://cdn3.vectorstock.com/i/1000x1000/46/22/motorcycle-logo-for-rent-vector-25604622.jpg"
+              className="h-6 mr-3 sm:h-9"
+              alt="Flowbite Logo"
+            />
           </NavLink>
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             Bike Fleet
           </span>
-
+         
           <div className="flex md:order-2">
-            <img
-              class="w-10 h-10 rounded"
-              src={avatar}
-              alt="Default avatar"
-            />
+            {/* <img className="w-10 h-10 rounded" src={avatar} alt="Default avatar" /> */}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -74,13 +205,26 @@ function NavBar(avatar){
                 >
                   My Riders
                 </NavLink>
-              </li>
+              </li> 
+              <li>
+                <NavLink
+                  to="/owner/mybikes"
+                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  My Bikes
+                </NavLink>
+              </li> 
+              <button className="text-white text-right" onClick={handleAccountActionsClick()}>My Account</button>             
             </ul>
+           
           </div>
+          
         </div>
+        
       </nav>
-        </>
-    )
+      <AccountDetails/>
+    </>
+  );
 }
 
 export default NavBar;

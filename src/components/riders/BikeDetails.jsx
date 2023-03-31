@@ -3,17 +3,22 @@ import { useSelector } from "react-redux";
 import { selectCurrentBikeDetail } from "../../features/bikeSlice";
 import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
 import NavPanel from "./joint/NavPanel";
-
 import { bookBike } from "../../api/rider/rider";
 import CustomSnackbar from "../common/CustomSnackbar";
+import { Dialog } from "@mui/material";
 
-function BikeDetails() {
-  const currentBikeDetails = useSelector(selectCurrentBikeDetail);
-  console.log(currentBikeDetails);
+function BikeDetails(
+  {openBikeDetails,
+  closeBikeDetails,}
+) {
+  const bikeData = useSelector(selectCurrentBikeDetail);
+  console.log(bikeData);
   const currentRiderDetails = useSelector(selectCurrentRiderDetail);
   let rider_id = currentRiderDetails.id;
-  let bike_id = currentBikeDetails.id;
-  let owner_id = currentBikeDetails.owner_id;
+  let bike_id = 1
+  let owner_id = 1
+  // let bike_id = currentBikeDetails.id;
+  // let owner_id = currentBikeDetails.owner_id;
   const [values, setValues] = useState({
     model: "",
     cc: "",
@@ -69,7 +74,7 @@ function BikeDetails() {
   // prepopulate our form with data in state
   useEffect(() => {
     const { model, cc, reg_number, price, location, image_url } =
-      currentBikeDetails;
+      bikeData;
     setValues({
       ...values,
       model,
@@ -86,7 +91,13 @@ function BikeDetails() {
   }, []);
   return (
     <>
-      <NavPanel />
+      {/* <NavPanel /> */}
+      <Dialog
+      maxWidth="lg"
+      fullWidth
+      open={openBikeDetails}
+      onClose={closeBikeDetails}
+      >
       <CustomSnackbar
         openSnackbar={openSnackbar}
         handleClose={closeSnackbar}
@@ -95,6 +106,7 @@ function BikeDetails() {
       />
       <div className="grid min-h-screen place-items-center">
         <div className="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+          
           <form className="mt-6">
             <div className="flex justify-between gap-3">
               <span className="w-1/2">
@@ -178,11 +190,13 @@ function BikeDetails() {
             >
               Image
             </label>
+          
             <input
               id="image_url"
-              type="text"
+              src={image_url}
               name="image_url"
               value={image_url}
+              type="image"
               readOnly={true}
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
             />
@@ -195,7 +209,7 @@ function BikeDetails() {
           </button>
         </div>
       </div>
-      ;
+      </Dialog>
     </>
   );
 }

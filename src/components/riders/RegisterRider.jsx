@@ -42,6 +42,7 @@ function RegisterRider() {
   } 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log("submit")
     return registerRider(
       full_name,
     username,
@@ -54,7 +55,7 @@ function RegisterRider() {
     email,
     date_of_birth,
     ).then((res) => {
-      if (res.status == 200) {
+      if (res.status == 201) {
         console.log("Account created");
         navigate("/rider/login")        
       } else {

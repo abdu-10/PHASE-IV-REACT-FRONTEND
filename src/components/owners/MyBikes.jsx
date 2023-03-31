@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "./shared/NavBar";
-import { allRiders } from "../../api/owner/owner";
-import { Typography, Stack, IconButton, Avatar, Box, Menu, MenuItem, LinearProgress } from "@mui/material";
+import { myBikes } from "../../api/owner/owner";
+import { Typography, Stack, Avatar, Box, MenuItem, Menu, IconButton, LinearProgress } from "@mui/material";
 import CustomTable from "../common/CustomTable";
+import NavBar from "./shared/NavBar";
+import { useSelector } from "react-redux";
+import { selectCurrentOwnerDetail } from "../../features/owners/ownersSlice";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import { setCurrentRiderDetail } from "../../features/riders/riderSlice";
+import DeleteIcon from '@mui/icons-material/Delete';
+import BikeDetails from "../riders/BikeDetails";
+import { useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import RiderDetails from "./RiderDetails";
-// import DeleteAccount from "../common/DeleteAccount";
-
-
-
-
-function AllRiders() {
-  const [loading, setLoading] = useState(false);
-  const [ridersData, setRidersData] = useState([]);
-  const [openRiderDetails, setOpenRiderDetails] = useState(false);
-  const [rowParams, setRowParams] = useState({});
-  const [rowData, setRowData] = useState([]);
+import { setCurrentBikeDetail } from "../../features/bikeSlice";
+function MyBikes(){
+    const currentOwnerDetails = useSelector(selectCurrentOwnerDetail)
+    let owner_id = currentOwnerDetails.id
+    const [loading, setLoading] = useState(false);
+  const [ownerBikesData, setOwnerBikesData] = useState([]);
+  const [openBikeDetails, setOpenBikeDetails] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [rowParams, setRowParams] = useState({});
+
+  const fetchOwnerBikes = async () => {
+    setLoading(true);
+    const payload = await myBikes(owner_id)    
+    setOwnerBikesData(payload.data.map( entry => entry.bike ))
+      setLoading(false);
+       
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,42 +36,42 @@ function AllRiders() {
   const handleCloseMenu = () => {
     setAnchorElNav(null);
   };
-
-  const closeRiderDetails = () => {
-    setOpenRiderDetails(false);
+  const closeBikeDetails = () => {
+    setOpenBikeDetails(false);
   };
-  const handleRiderActionsClick = (params) => (event) => {
+  const handleBikeActionsClick = (params) => (event) => {
     setRowParams(params.row);
     setAnchorElNav(event.currentTarget);
   }
+
   const handleMenuItemClick = (prop) => {
     console.log(`${prop} click params`, rowParams);   
     if (prop === "view") {
-      dispatch(setCurrentRiderDetail({ currentRiderDetail: rowParams }));
-      setOpenRiderDetails(true);
+      dispatch(setCurrentBikeDetail({ currentBikeDetail: rowParams }));
+      setOpenBikeDetails(true);
       handleCloseMenu();
     } else if (prop === "edit") {      
-      dispatch(setCurrentRiderDetail({ currentRiderDetail: rowParams }));
+      dispatch(setCurrentBikeDetail({ currentBikeDetail: rowParams }));
     }else if (prop === "delete"){
-      dispatch(setCurrentRiderDetail({ currentRiderDetail: rowParams }));
+      dispatch(setCurrentBikeDetail({ currentBikeDetail: rowParams }));
 
     } else
     handleCloseMenu();
   };
-  const RiderActions = () => {
+  const BikeActions = () => {
     return (
       <>
         {" "}
-        <RiderDetails
-          openRiderDetails={openRiderDetails}
-          closeRiderDetails={closeRiderDetails}
+        <BikeDetails
+          openBikeDetails={openBikeDetails}
+          closeBikeDetails={closeBikeDetails}
         />{" "}
         {/* <DeleteAccount
           openDeleteAccount={openDeleteAccount}
           closeDeleteModal={closeDeleteModal}
-          rider_code={rowParams.code}
+          bike_code={rowParams.code}
           // deactivationStatus={deactivationStatus}
-          // fetchStays={fetchRiders}
+          // fetchStays={fetchRider_Bikes}
         /> */}
         <Menu
           id="menu-appbar"
@@ -122,44 +128,37 @@ function AllRiders() {
       </>
     );
   };
-  
-
-  const fetchRiders = () => {
-    setLoading(true);
-    allRiders().then((res) => {
-      setRidersData(res.data)
-      setLoading(false);
-    });    
-  };
-
   useEffect(() => {
-    fetchRiders();
+    fetchOwnerBikes();
   }, []);
   const columns = [
     {
-      field: "full_name",
-      headerName: "Rider Name",
+      field: "model",
+      headerName: "Bike Brand and Model",
       width: 250,
+      renderCell: (params) => {
+        return (
+          <>
+            <Avatar sx={{ mr: 2 }} src={params.value} alt={params.value} />
+            {params.value}
+          </>
+        );
+      },
+    },
+    {
+      field: "cc",
+      headerName: "Engine Carrying Capacity(cc)",
+      width: 150,
       
     },
     {
-      field: "date_of_birth",
-      headerName: "DOB",
+      field: "reg_number",
+      headerName: "Number Plate",
       width: 150,
     },
     {
-      field: "phone_number",
-      headerName: "Telephone",
-      width: 150,
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      width: 150,
-    },
-    {
-      field: "licence_number",
-      headerName: "Driver License",
+      field: "price",
+      headerName: "Price Paid",
       width: 150,
     },
     {
@@ -169,41 +168,20 @@ function AllRiders() {
       width: 80,
       renderCell: (params) => {
         return (
-          <IconButton onClick={handleRiderActionsClick(params)}>
-            <MoreVertIcon/>
+          <IconButton onClick={handleBikeActionsClick(params)}>
+            <MoreVertIcon />
           </IconButton>
         );
       },
     },
-    
-    // {
-    //   field: "actions",
-    //   type: "actions",
-    //   headerName: "Actions",
-    //   width: 80,
-    //   renderCell: (params) => {
-    //     return (
-    //       // on click on the viw, user is able to see the rider deatils in depth
-    //       <div onClick={handleRiderActionClick(params)}>
-    //       <Box display="flex" alignItems="center" textAlign="center" >
-    //           <VisibilityOutlinedIcon
-    //             sx={{
-    //               color: `primary.main`,
-    //               mr: 1,
-    //               fontSize: "medium",
-    //             }}
-    //           />
-    //         </Box>
-    //       </div>
-    //     );
-    //   },
-    // },
+
   ]
-  return (
-    <>
-      
-      <NavBar/>
-      <div class="flex-grow sm:text-left text-center mt-10 mb-10" >
+
+return(
+<>
+<NavBar/>
+
+<div class="flex-grow sm:text-left text-center mt-10 mb-10" >
        </div>
       <Stack
         direction="row"
@@ -211,7 +189,7 @@ function AllRiders() {
         alignItems="flex-start"
         sx={{ p: 7 }}
       >
-        <Typography variant="h6" sx={{ fontWeight: "800" }}>These are the verified Riders on the platform</Typography>
+        <Typography variant="h6" sx={{ fontWeight: "800" }}>This are your bikes</Typography>
       </Stack>
       <Box
         sx={{
@@ -222,22 +200,20 @@ function AllRiders() {
           },
         }}
       >
-        <RiderActions/>
+        <BikeActions/>
         {loading && <LinearProgress/>}
-        {!loading && <CustomTable rows={ridersData} columns={columns}/>}
+        {!loading && <CustomTable rows={ownerBikesData} columns={columns}/>}
       </Box>
 
-      
-<footer class="bg-white rounded-lg shadow  m-4">
+      <footer class="bg-white rounded-lg shadow  m-4">
     <div class="w-full max-w-screen-xl absolute bottom-0 mt-12 mx-auto p-4 md:py-8">
        
         <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://abdu.com/" class="hover:underline">BikeFleet™</a>. All Rights Reserved.</span>
     </div>
 </footer>
 
-
-    </>
-  );
+</>
+)
 }
 
-export default AllRiders;
+export default MyBikes;

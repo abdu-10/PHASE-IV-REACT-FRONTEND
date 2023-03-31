@@ -44,7 +44,7 @@ function RegisterOwner() {
       password,
       password_confirmation,
     ).then((res) => {
-      if (res.status == 200) {
+      if (res.status == 201) {
         console.log("Account created"); 
         navigate("/owner/login")
         dispatch(setCurrentOwnerDetail({currentOwnerDetail: res.data}))       

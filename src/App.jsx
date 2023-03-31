@@ -20,6 +20,10 @@ const AllRiders = lazy(() =>
 const MyRiders = lazy(() =>
   import("./components/owners/MyRiders")
 );
+// ownerbikes
+const MyBikes = lazy(() =>
+  import("./components/owners/MyBikes")
+);
 // single rider
 import RiderDetails from './components/owners/RiderDetails';
 import RiderLogIn from './components/common/RiderLogIn';
@@ -69,6 +73,11 @@ function App() {
             <Route path='riders'>
               <Route index={true}  element={<AllRiders />}></Route>
               <Route path='view' element={<RiderDetails/>}/>
+            </Route>
+              {/* see owner bikes */}
+          <Route path='mybikes'>
+            <Route index={true} element={<MyBikes />}></Route>
+              <Route path='view' element={<BikeDetails/>}/>
             </Route>
             {/* see owner rider */}
             <Route path='myriders' element={<MyRiders />}>

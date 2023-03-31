@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import NavBar from "./shared/NavBar";
-
+import { Dialog } from "@mui/material";
+import { selectCurrentBikeDetail } from "../../features/bikeSlice";
 import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
 
-function RiderDetails() {
+function RiderDetails
+({openRiderDetails,
+  closeRiderDetails }
+  ) {
+  
   const [values, setValues] = useState(
     {
       full_name: "",
@@ -15,6 +20,8 @@ function RiderDetails() {
     id_number: "",
     licence_number: "",
     spouse_contact: "",
+
+    
     }
   )
   const {
@@ -26,6 +33,8 @@ function RiderDetails() {
     spouse_contact,
     email,
     date_of_birth,
+
+  
   } = values
 
   const currentRiderDetails = useSelector(selectCurrentRiderDetail)
@@ -56,7 +65,13 @@ function RiderDetails() {
   }, []);
   return (
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
+    <Dialog
+      maxWidth="lg"
+      fullWidth
+      open={openRiderDetails}
+      onClose={closeRiderDetails}
+      >
       <div className="bg-white shadow-md rounded mt-20 px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
         <div className="-mx-3 md:flex mb-6">
           <div className="md:w-1/2 px-3 mb-6 md:mb-0">
@@ -178,7 +193,7 @@ function RiderDetails() {
           </div>
         </div>
       </div>
-      ;
+      </Dialog>
     </>
   );
 }
