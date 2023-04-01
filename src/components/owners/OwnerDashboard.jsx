@@ -9,7 +9,7 @@ function OwnerDashboard() {
   return (
     <>
     {/* TODO: Render navigation bar and intro */}
-    <NavBar />
+    <NavBar user={currentOwnerDetails} />
     <Intro/>
     </>
   );

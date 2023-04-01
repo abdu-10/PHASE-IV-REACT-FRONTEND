@@ -86,18 +86,6 @@ function RiderBikes() {
           open={Boolean(anchorElNav)}
           onClose={handleCloseMenu}
         >
-          <MenuItem onClick={() => handleMenuItemClick("edit")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <EditIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Edit
-            </Box>
-          </MenuItem>
           <MenuItem onClick={() => handleMenuItemClick("view")}>
             <Box display="flex" alignItems="center" textAlign="center">
               <VisibilityOutlinedIcon
@@ -108,18 +96,6 @@ function RiderBikes() {
                 }}
               />
               View
-            </Box>
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick("delete")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <DeleteIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Delete
             </Box>
           </MenuItem>
         </Menu>{" "}
@@ -178,7 +154,7 @@ function RiderBikes() {
   return (
     <>
       {/* TO DO: Add a navigation component on top */}
-      <NavPanel/>
+      <NavPanel user={currentRiderDetails}/>
       <div class="flex-grow sm:text-left text-center mt-10 mb-10" >
        </div>
       <Stack

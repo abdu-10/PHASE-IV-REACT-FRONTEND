@@ -22,6 +22,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import BikeDetails from "./BikeDetails"
 
 import { setCurrentBikeDetail } from "../../features/bikeSlice";
+import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 function AllBikes() {
@@ -31,6 +32,9 @@ function AllBikes() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [rowParams, setRowParams] = useState({});
   const [rowData, setRowData] = useState([]);
+
+  const currentRiderDetails = useSelector(selectCurrentRiderDetail)
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -92,18 +96,7 @@ function AllBikes() {
           open={Boolean(anchorElNav)}
           onClose={handleCloseMenu}
         >
-          <MenuItem onClick={() => handleMenuItemClick("edit")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <EditIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Edit
-            </Box>
-          </MenuItem>
+        
           <MenuItem onClick={() => handleMenuItemClick("view")}>
             <Box display="flex" alignItems="center" textAlign="center">
               <VisibilityOutlinedIcon
@@ -114,18 +107,6 @@ function AllBikes() {
                 }}
               />
               View
-            </Box>
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick("delete")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <DeleteIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Delete
             </Box>
           </MenuItem>
         </Menu>{" "}
@@ -205,7 +186,7 @@ function AllBikes() {
   return (
     <>
       {/* TO DO: Add a navigation component on top */}
-      <NavPanel />
+      <NavPanel user={currentRiderDetails}/>
       <div class="flex-grow sm:text-left text-center mt-12 mb-7"></div>
       <Stack
         direction="row"

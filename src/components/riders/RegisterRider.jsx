@@ -227,13 +227,7 @@ function RegisterRider() {
                           placeholder="YYYY-MM-DD"
                         />
                       </div>
-                      <div className="md:col-span-5 text-right">
-                        <div className="inline-flex items-end">
-                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                          Submit
-                          </button>
-                        </div>
-                      </div>
+                      
                     </div>
                   </form>
                 </div>

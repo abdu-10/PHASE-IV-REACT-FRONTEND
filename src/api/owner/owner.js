@@ -45,6 +45,10 @@ export const createBike = async (
   });
 };
 
+export const fetchOwner = async (owner_id) => {
+  return await backendAxios.get(`/owners/${owner_id}`);
+};
+
 export const allRiders = async () => {
   return await backendAxios.get("/riders");
 };
@@ -59,7 +63,28 @@ export const myRiders = async (owner_id) => {
 export const riderDetails = async (rider_id) => {
   return await backendAxios.get(`/riders/${rider_id}`);
 };
+export const ownerDetails = async (owner_id) => {
+  return await backendAxios.get(`/owners/${owner_id}`);
+};
 
-// export const logOut = async () => {
-//   return await backendAxios.delete(`/logout`)
-// }
+export const logOut = async () => {
+  return await backendAxios.delete(`/logout`)
+}
+
+export const updateOwnerDetail = async (
+  owner_id,
+  full_name,
+  username,
+  phone_number,
+  password,
+  password_confirmation,
+ 
+) => {
+  return await backendAxios.patch(`/owners/${owner_id}`, {
+    full_name,
+    username,
+    phone_number,
+    password,
+    password_confirmation,
+  });
+};

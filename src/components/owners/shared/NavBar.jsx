@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
+import OwnerDetails from "../OwnerDetails";
+import EditOwnerDetails from "../EditOwnerDetails";
+import { setCurrentOwnerDetail } from "../../../features/owners/ownersSlice";
 import {
   Typography,
   Stack,
@@ -16,11 +19,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { CoPresentOutlined, Logout } from "@mui/icons-material";
-// import { logOut } from "../../../api/owner/owner";
+import { logOut } from "../../../api/owner/owner";
 
-function NavBar() {
+function NavBar({user}) {
+  const navigate = useNavigate()
   const [selectedOption, setSelectedOption] =  useState("")
   const [anchMenu, setAnchMenu] = useState(null)
+  const [openOwnerDetails, setOpenOwnerDetails] = useState(false);
+  const[openEditOwnerDetails, setOpenEditOwnerDetails] = useState(false);
   const handleAccountActionsClick = () => (event) => {
     // setSelectedOption(params);
     console.log("clicked")
@@ -29,26 +35,25 @@ function NavBar() {
   const handleCloseMenu = () => {
     setAnchMenu(null);
   };
+  const closeOwnerDetails = () => {
+    setOpenOwnerDetails(false);
+  };
+  const closeEditOwnerDetails = () => {
+    setOpenEditOwnerDetails(false);
+  }
 
   const handleMenuItemClick = (prop) => {
-    // console.log(`${prop} click params`, rowParams);
     handleCloseMenu();
     if (prop === "view") {
-      // dispatch(setCurrentOwnerDetail({ currentOwnerDetail: rowParams }));
       setOpenOwnerDetails(true);
     } else if (prop === "edit") {
-      
-      // dispatch(setCurrentOwnerDetail({ currentOwnerDetail: rowParams }));
-    }else if (prop === "delete"){
-      console.log("clicked")
-      // dispatch(setCurrentOwnerDetail({ currentOwnerDetail: rowParams }));
-      // logOut().then((res) =>{
-      //   if (res.status === 204){
-      //     Navigate("/")
-      //   }
-      // })
-
-
+      setOpenEditOwnerDetails(true);
+    }else if (prop === "logout"){
+      logOut().then((res) => {
+        setCurrentOwnerDetail(null)
+        navigate("/")
+      })
+      handleCloseMenu();
     } else
     handleCloseMenu();
   };
@@ -57,18 +62,15 @@ function NavBar() {
     return (
       <>
         {" "}
-        {/* <OwnerDetails
+        <OwnerDetails
           openOwnerDetails={openOwnerDetails}
           closeOwnerDetails={closeOwnerDetails}
         />{" "}
-        <DeleteAccount
-          openDeleteAccount={openDeleteAccount}
-          closeDeleteModal={closeDeleteModal}
-          Owner_code={rowParams.code}
-          // deactivationStatus={deactivationStatus}
-          // fetchStays={fetchOwner}
-        /> */}
-        <Menu
+        <EditOwnerDetails
+          openEditOwnerDetails={openEditOwnerDetails}
+          closeEditOwnerDetails={closeEditOwnerDetails}
+        />{" "}
+       <Menu
           id="menu-appbar"
           anchorEl={anchMenu}
           anchorOrigin={{
@@ -82,19 +84,8 @@ function NavBar() {
           }}
           open={Boolean(anchMenu)}
           onClose={handleCloseMenu}
+
         >
-            <MenuItem onClick={() => handleMenuItemClick("edit")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <EditIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Edit Account Details
-            </Box>
-          </MenuItem>
           <MenuItem onClick={() => handleMenuItemClick("view")}>
             <Box display="flex" alignItems="center" textAlign="center">
               <VisibilityOutlinedIcon
@@ -107,7 +98,19 @@ function NavBar() {
               View Account Details
             </Box>
           </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick("add-students")}>
+            <MenuItem onClick={() => handleMenuItemClick("edit")}>
+            <Box display="flex" alignItems="center" textAlign="center">
+              <EditIcon
+                sx={{
+                  color: `primary.main`,
+                  mr: 1,
+                  fontSize: "medium",
+                }}
+              />
+              Edit Account Details
+            </Box>
+          </MenuItem>          
+          <MenuItem onClick={() => handleMenuItemClick("logout")}>
             <Box display="flex" alignItems="center" textAlign="center">
               <LogoutIcon
                 sx={{
@@ -117,18 +120,6 @@ function NavBar() {
                 }}
               />
               Log Out
-            </Box>
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick("add-students")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <DeleteIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Delete Account permanently
             </Box>
           </MenuItem>
         </Menu>{" "}
@@ -214,13 +205,14 @@ function NavBar() {
                   My Bikes
                 </NavLink>
               </li> 
-              <button className="text-white text-right" onClick={handleAccountActionsClick()}>My Account</button>             
             </ul>
-           
           </div>
-          
+          <div className="flex md:order-2">
+            <Avatar sx={{ mr: 2 }}
+            />
+              <button className="text-white text-right" onClick={handleAccountActionsClick()}>{user.username}</button>             
+          </div>
         </div>
-        
       </nav>
       <AccountDetails/>
     </>

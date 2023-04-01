@@ -11,12 +11,15 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { setCurrentRiderDetail } from "../../features/riders/riderSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RiderDetails from "./RiderDetails";
+import { selectCurrentOwnerDetail } from "../../features/owners/ownersSlice";
 
 
 
 function MyRiders() {
+  const currentOwnerDetails = useSelector(selectCurrentOwnerDetail)
+  let owner_id = currentOwnerDetails.id
   // TO DO: REPLACE HARD CODED OWNER ID WITH OWNER_ID IN STATE
-  let owner_id = 1;
+  
   const [loading, setLoading] = useState(false);
   const [myRidersData, setMyRidersData] = useState([]);
   const [openRiderDetails, setOpenRiderDetails] = useState(false);
@@ -88,18 +91,7 @@ function MyRiders() {
           open={Boolean(anchorElNav)}
           onClose={handleCloseMenu}
         >
-          <MenuItem onClick={() => handleMenuItemClick("edit")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <EditIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Edit
-            </Box>
-          </MenuItem>
+         
           <MenuItem onClick={() => handleMenuItemClick("view")}>
             <Box display="flex" alignItems="center" textAlign="center">
               <VisibilityOutlinedIcon
@@ -110,18 +102,6 @@ function MyRiders() {
                 }}
               />
               View
-            </Box>
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick("delete")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <DeleteIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Delete
             </Box>
           </MenuItem>
         </Menu>{" "}
@@ -186,7 +166,7 @@ function MyRiders() {
   return (
     <>
       {/* TO DO: Add a navigation component on top */}
-      <NavBar />
+      <NavBar user={currentOwnerDetails} />
       <div class="flex-grow sm:text-left text-center mt-10 mb-10" >
        </div>
       <Stack

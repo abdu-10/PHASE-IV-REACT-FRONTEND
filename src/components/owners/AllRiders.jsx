@@ -11,12 +11,15 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { setCurrentRiderDetail } from "../../features/riders/riderSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RiderDetails from "./RiderDetails";
+import { selectCurrentOwnerDetail } from "../../features/owners/ownersSlice";
 // import DeleteAccount from "../common/DeleteAccount";
 
 
 
 
 function AllRiders() {
+  const currentOwnerDetails = useSelector(selectCurrentOwnerDetail)
+  let owner_id = currentOwnerDetails.id
   const [loading, setLoading] = useState(false);
   const [ridersData, setRidersData] = useState([]);
   const [openRiderDetails, setOpenRiderDetails] = useState(false);
@@ -82,18 +85,6 @@ function AllRiders() {
           open={Boolean(anchorElNav)}
           onClose={handleCloseMenu}
         >
-          <MenuItem onClick={() => handleMenuItemClick("edit")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <EditIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Edit
-            </Box>
-          </MenuItem>
           <MenuItem onClick={() => handleMenuItemClick("view")}>
             <Box display="flex" alignItems="center" textAlign="center">
               <VisibilityOutlinedIcon
@@ -104,18 +95,6 @@ function AllRiders() {
                 }}
               />
               View
-            </Box>
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick("delete")}>
-            <Box display="flex" alignItems="center" textAlign="center">
-              <DeleteIcon
-                sx={{
-                  color: `primary.main`,
-                  mr: 1,
-                  fontSize: "medium",
-                }}
-              />
-              Delete
             </Box>
           </MenuItem>
         </Menu>{" "}
@@ -202,7 +181,7 @@ function AllRiders() {
   return (
     <>
       
-      <NavBar/>
+      <NavBar user={currentOwnerDetails}/>
       <div class="flex-grow sm:text-left text-center mt-10 mb-10" >
        </div>
       <Stack

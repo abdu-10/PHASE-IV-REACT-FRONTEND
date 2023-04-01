@@ -10,10 +10,10 @@ function RiderDashboard() {
   const bikeData = useSelector(selectCurrentBikeDetail);
   console.log(bikeData);
   const currentRiderDetails = useSelector(selectCurrentRiderDetail)
-  console.log(currentRiderDetails)
+  // console.log(currentRiderDetails)
   return(
   <>
-  <NavPanel avatar={currentRiderDetails.avatar}/>
+  <NavPanel user={currentRiderDetails}/>
   <Preface/>
   </>
   )
