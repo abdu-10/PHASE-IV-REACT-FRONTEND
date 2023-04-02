@@ -28,7 +28,7 @@ The following have been used on this project:
 
 
 
-#### Live link to view the project <a href="https://sweet-scone-54d5d6.netlify.app">View Bike Fleet</a>
+#### Live link to view the project <a href="https://phase-iv-react-frontend-1.vercel.app/">View Bike Fleet</a>
 
 
 
