@@ -35,7 +35,7 @@ function MyBikes() {
     setLoading(true);
     console.log(owner_id)
     const payload = await myBikes(owner_id);
-    setOwnerBikesData(payload.data.map((entry) => entry.bike));
+    setOwnerBikesData(payload.data);
     setLoading(false);
   };
 
@@ -170,7 +170,7 @@ function MyBikes() {
         sx={{ p: 7 }}
       >
         <Typography variant="h6" sx={{ fontWeight: "800" }}>
-          This are your bikes
+          These are your bikes
         </Typography>
       </Stack>
       <Box

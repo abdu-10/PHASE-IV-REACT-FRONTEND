@@ -53,7 +53,7 @@ export const allRiders = async () => {
   return await backendAxios.get("/riders");
 };
 export const myBikes = async (owner_id) => {
-  return await backendAxios.get(`/rider_bikes/bikes/${owner_id}`);
+  return await backendAxios.get(`/bikes/owner/${owner_id}`);
 };
 export const myRiders = async (owner_id) => {
   return await backendAxios.get(`/rider_bikes/riders/${owner_id}`);

@@ -47,15 +47,15 @@ const RiderBikes = lazy(() =>
 function App() {
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   // auto-login
-  //   backendAxios.get("/o-me").then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
-  // console.log(user)
+  useEffect(() => {
+    // auto-login
+    backendAxios.get("/o-me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+  console.log(user)
 
   return (
     <div className="App">
