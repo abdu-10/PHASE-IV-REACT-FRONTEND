@@ -31,6 +31,9 @@ import RiderLogIn from './components/common/RiderLogIn';
 // dashboard
 import RiderDashboard from './components/riders/RiderDashboard';
 import RegisterRider from './components/riders/RegisterRider';
+
+// auto
+import { backendAxios } from './api/axios';
 // allbikes view
 const AllBikes = lazy(() =>
   import("./components/riders/AllBikes")
@@ -44,15 +47,15 @@ const RiderBikes = lazy(() =>
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    // auto-login
-    fetch("/o-me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
-  }, []);
-  console.log(user)
+  // useEffect(() => {
+  //   // auto-login
+  //   backendAxios.get("/o-me").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //   });
+  // }, []);
+  // console.log(user)
 
   return (
     <div className="App">

@@ -18,7 +18,7 @@ import { selectCurrentOwnerDetail } from "../../features/owners/ownersSlice";
 function MyRiders() {
   const currentOwnerDetails = useSelector(selectCurrentOwnerDetail)
   let owner_id = currentOwnerDetails.id
-  // TO DO: REPLACE HARD CODED OWNER ID WITH OWNER_ID IN STATE
+
   
   const [loading, setLoading] = useState(false);
   const [myRidersData, setMyRidersData] = useState([]);

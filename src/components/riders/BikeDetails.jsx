@@ -7,18 +7,20 @@ import { bookBike } from "../../api/rider/rider";
 import CustomSnackbar from "../common/CustomSnackbar";
 import { Dialog } from "@mui/material";
 
+
 function BikeDetails(
   {openBikeDetails,
-  closeBikeDetails,}
+  closeBikeDetails,
+  currentBikeData,
+}
 ) {
   const bikeData = useSelector(selectCurrentBikeDetail);
-  console.log(bikeData);
+  
   const currentRiderDetails = useSelector(selectCurrentRiderDetail);
   let rider_id = currentRiderDetails.id;
-  let bike_id = 1
-  let owner_id = 1
-  // let bike_id = currentBikeDetails.id;
-  // let owner_id = currentBikeDetails.owner_id;
+  let bike_id = bikeData.id
+  let owner_id = bikeData.owner_id
+  console.log(bike_id, owner_id);
   const [values, setValues] = useState({
     model: "",
     cc: "",

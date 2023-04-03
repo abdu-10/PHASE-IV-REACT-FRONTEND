@@ -23,6 +23,7 @@ import BikeDetails from "./BikeDetails"
 
 import { setCurrentBikeDetail } from "../../features/bikeSlice";
 import { selectCurrentRiderDetail } from "../../features/riders/riderSlice";
+// import { selectCurrentBikeDetail } from "../../features/bikeSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 function AllBikes() {
@@ -73,6 +74,7 @@ function AllBikes() {
         <BikeDetails
           openBikeDetails={openBikeDetails}
           closeBikeDetails={closeBikeDetails}
+          
         />{" "}
         {/* <DeleteAccount
           openDeleteAccount={openDeleteAccount}
